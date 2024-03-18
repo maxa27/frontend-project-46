@@ -1,4 +1,4 @@
-import _ from "lodash";
+import _ from 'lodash';
 
 export default (file1, file2) => {
   const keys1 = Object.keys(file1);
@@ -24,5 +24,5 @@ export default (file1, file2) => {
     return line;
   });
 
-  return ["{", ...lines].join("\n  ") + "\n}";
+  return `${['{', ...lines].join('\n  ')}\n}`;
 };

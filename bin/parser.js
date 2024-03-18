@@ -1,3 +1,3 @@
 import path from "path";
 
-export const resolvePath = (filePath) => path.resolve(process.cwd(), filePath);
+export default (filePath) => path.resolve(process.cwd(), filePath);
