@@ -1,6 +1,6 @@
 import _ from 'lodash';
 
-export default (file1, file2) => {
+export const diff = (file1, file2) => {
   const keys1 = Object.keys(file1);
   const keys2 = Object.keys(file2);
 
@@ -11,7 +11,7 @@ export default (file1, file2) => {
       if (_.isEqual(file1[key], file2[key])) {
         line = `  ${key}: ${file1[key]}`;
       } else {
-        line = `- ${key}: ${file1[key]} \n  + ${key}: ${file2[key]}`;
+        line = `- ${key}: ${file1[key]}, \n  + ${key}: ${file2[key]}`;
       }
     }
 
@@ -24,5 +24,7 @@ export default (file1, file2) => {
     return line;
   });
 
-  return `${['{', ...lines].join('\n  ')}\n}`;
+  return lines;
 };
+
+export const toString = (lines) => console.log(`${['{', ...lines].join('\n  ')}\n}`);

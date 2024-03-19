@@ -1,8 +1,7 @@
 #!/usr/bin/env node
 import { program } from 'commander';
-import { fs } from 'file-system';
-import parser from './parser.js';
-import diff from './getDiff.js';
+import { getPath, getFile, getObject } from './parser.js';
+import { diff, toString } from './getDiff.js';
 
 program
   .name('gendiff')
@@ -12,13 +11,9 @@ program
   .arguments('<filepath1> <filepath2>')
   .option('-f, --format [type]', 'output format')
   .action((first, second) => {
-    const firstFile = JSON.parse(fs.readFileSync(parser(first), {
-      encoding: 'utf8',
-    }));
-    const secondFile = JSON.parse(fs.readFileSync(parser(second), {
-      encoding: 'utf8',
-    }));
-    console.log(diff(firstFile, secondFile));
+    const firstFile = getObject(getFile(getPath(first)));
+    const secondFile = getObject(getFile(getPath(second)));
+    toString(diff(firstFile, secondFile));
   });
 
 program.parse();
